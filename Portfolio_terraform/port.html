@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Dwaraknath | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.cdnjs.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0d14;
+            --bg-secondary: #141a24;
+            --text-primary: #e6f1ff;
+            --text-secondary: #8892b0;
+            --accent: #64ffda;
+            --card-bg: #1a1f2d;
+            --spacing: clamp(50px, 5vw, 100px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Work Sans', sans-serif;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 1rem;
+            background: rgba(10, 13, 20, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            background: rgba(100, 255, 218, 0.1);
+        }
+
+        section {
+            padding: var(--spacing);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero {
+            padding-top: 120px;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+        }
+
+        .section-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--accent);
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 2px;
+            background: var(--accent);
+            margin: 1rem auto;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+
+        .project-card:hover .project-img {
+            filter: none;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .card-title {
+            color: var(--accent);
+            font-family: 'Space Mono', monospace;
+            margin-bottom: 1rem;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tag {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent);
+            padding: 0.2rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+            border: 2px solid var(--accent);
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+
+        .profile-img:hover {
+            filter: none;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skill-level {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .skill-level h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-family: 'Space Mono', monospace;
+            text-align: center;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin: 0.8rem 0;
+            color: var(--text-secondary);
+        }
+
+        .skill-list li::before {
+            content: '▹';
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#skills">SKILLS</a></li>
+            <li><a href="#education">EDUCATION</a></li>
+            <li><a href="#experience">EXPERIENCE</a></li>
+            <li><a href="#projects">PROJECTS</a></li>
+            <li><a href="#certifications">CERTIFICATIONS</a></li>
+            <li><a href="#workshops">WORKSHOPS</a></li>
+            <li><a href="#venture">VENTURE</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <img src="https://i.pinimg.com/736x/5e/6c/9d/5e6c9d6a1e8b3b17a3c96e7c4d3c93fe.jpg" alt="Profile" class="profile-img">
+            <h1 class="section-title">R Dwaraknath</h1>
+            <p>Fullstack Web Developer | UI/UX Designer</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:youremail@example.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-level">
+                <h3>Basic</h3>
+                <ul class="skill-list">
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>JavaScript</li>
+                    <li>Git</li>
+                    <li>Python</li>
+                </ul>
+            </div>
+            <div class="skill-level">
+                <h3>Intermediate</h3>
+                <ul class="skill-list">
+                    <li>React.js</li>
+                    <li>Node.js</li>
+                    <li>PostgreSQL</li>
+                    <li>UI/UX Design</li>
+                    <li>Express.js</li>
+                </ul>
+            </div>
+            <div class="skill-level">
+                <h3>Proficient</h3>
+                <ul class="skill-list">
+                    <li>Django</li>
+                    <li>Database Design</li>
+                    <li>Figma</li>
+                    <li>API Development</li>
+                    <li>System Design</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3 class="card-title">B.Tech in Computer Science</h3>
+                <p class="card-subtitle">GITAM University | 2020 - 2024</p>
+                <p>CGPA: 8.5/10</p>
+                <p>Key Courses: Data Structures, Algorithms, Database Management, Web Development</p>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Intermediate Education</h3>
+                <p class="card-subtitle">Sri Chaitanya Jr College | 2018 - 2020</p>
+                <p>Percentage: 95%</p>
+                <p>Specialization: Mathematics, Physics, Chemistry</p>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Secondary Education</h3>
+                <p class="card-subtitle">Delhi Public School | 2017 - 2018</p>
+                <p>CGPA: 9.8/10</p>
+                <p>Activities: Science Club, Computer Programming Club</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title">Experience</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3 class="card-title">Software Development Intern</h3>
+                <p class="card-subtitle">Tech Solutions Inc. | June 2023 - July 2023</p>
+                <ul class="skill-list">
+                    <li>Developed full-stack web applications using React and Node.js</li>
+                    <li>Implemented responsive design principles and optimized performance</li>
+                    <li>Collaborated with senior developers on high-priority projects</li>
+                    <li>Participated in code reviews and agile development processes</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="card-grid">
+            <div class="project-card">
+                <img src="https://i.pinimg.com/736x/c4/c8/08/c4c8085cd050efafd96b021591e6f75c.jpg" alt="Movie Review" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">Movie Review Platform</h3>
+                    <p class="project-description">A dynamic platform for movie reviews with user dashboard and community feedback system.</p>
+                    <div class="tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">Django</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <img src="https://i.pinimg.com/736x/6e/fb/ca/6efbca15e6b9d1b9c6852f872d6418ee.jpg" alt="Secure File Storage" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">Secure Document Vault</h3>
+                    <p class="project-description">Secure platform for managing important documents with encryption and easy accessibility.</p>
+                    <div class="tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="https://i.pinimg.com/736x/cb/82/ae/cb82ae5554b70caa354df5361e03743d.jpg" alt="X-CHANGE" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">X-CHANGE</h3>
+                    <p class="project-description">College-focused platform for peer-to-peer money exchange and digital transactions.</p>
+                    <div class
